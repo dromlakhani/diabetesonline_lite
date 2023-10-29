@@ -4,12 +4,13 @@ from datetime import date
 from google.cloud import storage
 
 # Initialize a client for Google Cloud Storage
-def initialize_storage_client(credentials_file):
-    return storage.Client.from_service_account_json(credentials_file)
+def initialize_storage_client(credentials_string):
+    return storage.Client.from_service_account_info(credentials_string)
 
 # Upload a file to a Google Cloud Storage bucket
 def upload_to_bucket(bucket_name, folder_name, file_name, content):
-    client = initialize_storage_client("/Users/omlakhani/Library/CloudStorage/OneDrive-Personal/PROJECTS2023/Experiments_2023/Streamlit_googlecloud/dark-tenure-397604-ecbea11c3dd9.json")
+    # Using st.secrets to fetch Google Cloud credentials
+    client = initialize_storage_client(st.secrets["GCP_CREDENTIALS"])
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(f"{folder_name}/{file_name}")
     blob.upload_from_string(content)
