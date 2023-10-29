@@ -81,8 +81,8 @@ if st.button('Submit'):
         'weight': weight,
         'bmi': bmi
     }
-    df = df.append(new_entry, ignore_index=True)
-    save_data(df)
+    # df = df.append(new_entry, ignore_index=True)
+    # save_data(df)
 
     txt_file_name = f"{patient_name}.txt"
     bucket_name = "reportgpt_drom"
